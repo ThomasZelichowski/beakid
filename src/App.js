@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
 
-const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;  // API key from .env file
+
+const apiKey = process.env.REACT_APP_OPENAI_API_KEY; 
+console.log(process.env) // API key from .env file
+console.log("Environment Variables: ", process.env);
+alert(`API Key: ${process.env.REACT_APP_OPENAI_API_KEY}`);
 
 // Constants
 const MAX_STEPS = 10; 
@@ -59,6 +63,7 @@ function App() {
   }, []);
 
   const startListening = () => {
+    console.log(`Bearer ${apiKey}`);
     if (!isListening && speechRecognition) {
       speechRecognition.start();
     }
@@ -142,7 +147,7 @@ function App() {
       const result = await axios.post(openaiUrl, requestData, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer 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`, // Use the API key from .env
+          'Authorization': `Bearer ${apiKey}`,
         },
       });
 
